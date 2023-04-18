@@ -5,7 +5,7 @@ from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 
 FONT_STYLE = "freesansbold.ttf"
-
+GAME_SPEED = 20
 
 class Game:
     def __init__(self):
@@ -16,13 +16,14 @@ class Game:
         self.clock = pygame.time.Clock()
         self.playing = False
         self.running = False
-        self.game_speed = 20
+        self.game_speed = GAME_SPEED
         self.score = 0
         self.death_count = 0
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
+        self.score_list = []
 
     def execute(self):
         self.running = True
@@ -57,18 +58,17 @@ class Game:
     def update_score(self):
         self.score += 1
         if self.score % 100 == 0:
-            self.game_speed += 5
+            self.game_speed += 2
 
     def draw_score(self):
-        font = pygame.font.Font(FONT_STYLE, 22)
-        text = font.render(f"Score: {self.score}", True, (0, 0, 0))
+        text = self.text_creator(f"Score: {self.score}")
         text_rect = text.get_rect()
         text_rect.center = (1000, 50)
         self.screen.blit (text, text_rect)
 
     def draw(self):
         self.clock.tick(FPS)
-        self.screen.fill((255, 255, 255)) # '#FFFFFF'
+        self.screen.fill((255, 255, 255)) 
         self.draw_background()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
@@ -91,27 +91,36 @@ class Game:
                 self.playing = False
                 self.running = False
             elif event.type == pygame.KEYDOWN:
+                
+                self.score = 0
+                self.game_speed = GAME_SPEED
                 self.run()
 
-    def show_menu(self):
-        self.screen.fill((255, 255, 255))
+    def text_creator(self, text_creater):
+        font = pygame.font.Font(FONT_STYLE, 22)
+        text = font.render(text_creater, True, (0, 0, 0))
+        return text
+        
+    def menu_creator_center(self, text_input, y):
+        if self.death_count == 0:
+           secreen_fill = self.screen.fill((255, 255, 255))
+        else:
+            secreen_fill = None
+        
+        secreen_fill
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
-
+        text = self.text_creator(text_input)
+        text_rect = text.get_rect()
+        text_rect.center = (half_screen_width, half_screen_height + y)
+        self.screen.blit(text, text_rect)
+        
+    def show_menu(self):
         if self.death_count == 0:
-            font = pygame.font.Font(FONT_STYLE, 22)
-            text = font.render("Press any key to start", True, (0, 0, 0))
-            text_rect = text.get_rect()
-            text_rect.center = (half_screen_width, half_screen_height)
-            self.screen.blit(text, text_rect)
+            self.menu_creator_center("Press any key to start", 0)
         else:
-            self.screen.blit(ICON, (half_screen_width - 20, half_screen_height - 140))
-            ## mostrar mensagem de "Press any key to restart"
-            ## mostrar score atingido
-            ## mostrar death_count
-
-            ### Resetar score e game_speed quando o jogo for 'restartado'
-            ### Criar método para remover a repetição de código para o texto
+            self.menu_creator_center(f"Press any key to restart. Deaths: {self.death_count}. Score: {self.score}", 0)
+            self.menu_creator_center(f"TOP SCORE: {max(self.score_list)} ", 50)
 
         pygame.display.flip()  # .update()
 

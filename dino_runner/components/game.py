@@ -61,7 +61,7 @@ class Game:
             self.game_speed += 2
 
     def draw_score(self):
-        text = self.text_creator(f"Score: {self.score}")
+        text = self.text_creator(f"Score: {self.score}",22)
         text_rect = text.get_rect()
         text_rect.center = (1000, 50)
         self.screen.blit (text, text_rect)
@@ -91,13 +91,12 @@ class Game:
                 self.playing = False
                 self.running = False
             elif event.type == pygame.KEYDOWN:
-                
                 self.score = 0
                 self.game_speed = GAME_SPEED
                 self.run()
 
-    def text_creator(self, text_creater):
-        font = pygame.font.Font(FONT_STYLE, 22)
+    def text_creator(self, text_creater,font_size):
+        font = pygame.font.Font(FONT_STYLE, font_size)
         text = font.render(text_creater, True, (0, 0, 0))
         return text
         
@@ -110,7 +109,7 @@ class Game:
         secreen_fill
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
-        text = self.text_creator(text_input)
+        text = self.text_creator(text_input, 22)
         text_rect = text.get_rect()
         text_rect.center = (half_screen_width, half_screen_height + y)
         self.screen.blit(text, text_rect)
@@ -118,10 +117,12 @@ class Game:
     def show_menu(self):
         if self.death_count == 0:
             self.menu_creator_center("Press any key to start", 0)
+            
         else:
             self.menu_creator_center(f"Press any key to restart. Deaths: {self.death_count}. Score: {self.score}", 0)
-            self.menu_creator_center(f"TOP SCORE: {max(self.score_list)} ", 50)
+            self.menu_creator_center(f"TOP SCORE: {max(self.score_list)} ", -50)
 
+       
         pygame.display.flip()  # .update()
 
         self.handle_events_on_menu()

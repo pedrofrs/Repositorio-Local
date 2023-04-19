@@ -1,6 +1,6 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, GAME_OVER
 from dino_runner.utils.text_utils import draw_message_component
 from dino_runner.utils.text_utils import FONT_STYLE
 from dino_runner.components.dinosaur import Dinosaur
@@ -119,7 +119,7 @@ class Game:
 
     def text_creator(self, text_creater,font_size):
         font = pygame.font.Font(FONT_STYLE, font_size)
-        text = font.render(text_creater, True, (0, 0, 0))
+        text = font.render(text_creater, True, (83,83,83))
         return text
         
     def menu_creator_center(self, text_input, y):
@@ -141,8 +141,10 @@ class Game:
             self.menu_creator_center("Press any key to start", 0)
             
         else:
-            self.menu_creator_center(f"Press any key to restart. Deaths: {self.death_count}. Score: {self.score}", 0)
-            self.menu_creator_center(f"TOP SCORE: {max(self.score_list)} ", -50)
+            self.menu_creator_center(f"Press any key to restart. Deaths: {self.death_count}. Score: {self.score}", -50)
+            self.menu_creator_center(f"TOP SCORE: {max(self.score_list)} ", -100)
+            self.screen.blit(GAME_OVER,( (SCREEN_HEIGHT/2)+ 50, SCREEN_HEIGHT/2))
+
 
        
         pygame.display.flip()  # .update()

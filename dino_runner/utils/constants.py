@@ -26,6 +26,11 @@ RUNNING_HAMMER = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2.png")),
 ]
 
+DINO_HELLI = [
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoHelli.png"))
+]
+
+
 JUMPING = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJump.png"))
 JUMPING_SHIELD = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpShield.png"))
 JUMPING_HAMMER = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJumpHammer.png"))
@@ -61,6 +66,9 @@ BIRD = [
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird2.png")),
 ]
 
+
+
+
 CLOUD = pygame.image.load(os.path.join(IMG_DIR, 'Other/Cloud.png'))
 SHIELD = pygame.image.load(os.path.join(IMG_DIR, 'Other/shield.png'))
 HAMMER = pygame.image.load(os.path.join(IMG_DIR, 'Other/hammer.png'))
@@ -69,5 +77,11 @@ BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
+DINO_HELLI_ICON = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoHelli_Icon.png"))
+
+GAME_OVER = pygame.image.load(os.path.join(IMG_DIR,'Other/GameOver.png'))
+
 DEFAULT_TYPE = "default"
+HAMMER_TYPE = "hammer"
 SHIELD_TYPE = "shield"
+HELLI_TYPE = "helli"

@@ -10,10 +10,7 @@ class ObstacleManager:
         self.obstacles = []
 
     def update(self, game):
-        obstacle_type = [
-            Cactus(),
-            Bird(),
-        ]
+        obstacle_type = [Cactus(),Bird(),]
 
         if len(self.obstacles) == 0:
             self.obstacles.append(obstacle_type[random.randint(0,1)])
@@ -27,8 +24,9 @@ class ObstacleManager:
                     game.death_count += 1
                     game.score_list.append(game.score + 1)
                     break
-                else:
+                elif game.player.hammer == True:
                     self.obstacles.remove(obstacle)
+
 
     def reset_obstacles(self):
         self.obstacles = []

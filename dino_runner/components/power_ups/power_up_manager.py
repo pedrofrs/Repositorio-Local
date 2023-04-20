@@ -39,9 +39,10 @@ class PowerUpManager:
         if power_up_type == 'helli':
             game.game_speed += 5
             game.player.dino_rect.y -= 80
-        if power_up_type == 'shield':
+        elif power_up_type == 'shield':
             game.game_speed -= 5
-             
+        elif power_up_type == 'hammer':
+            pass
             
 
     def draw(self, screen):

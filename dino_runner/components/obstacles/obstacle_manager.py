@@ -32,7 +32,7 @@ class ObstacleManager:
                         continue
                     elif game.player.type == HELLI_TYPE:
                          self.obstacles.remove(obstacle)
-                         game.game_speed + 1
+                         game.game_speed += 1
 
     def reset_obstacles(self):
         self.obstacles = []
